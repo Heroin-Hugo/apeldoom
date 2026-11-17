@@ -26,7 +26,7 @@ public class GunParent : MonoBehaviour
 
     protected void Shoot()
     {
-        animator.SetTrigger("Shoot");
+        if(animator != null) animator.SetTrigger("Shoot");
 
         RaycastHit hit;
         if(Physics.Raycast(fpsCam.position, fpsCam.forward, out hit, weaponRange, hitLayers))
