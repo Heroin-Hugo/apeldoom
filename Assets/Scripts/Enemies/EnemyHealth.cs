@@ -7,10 +7,14 @@ public class EnemyHealth : MonoBehaviour
 
     [Header("JUICE")]
     [SerializeField] private GameObject hitParticle;
+    [SerializeField] private GameObject dieParticle;
+    [SerializeField] private AudioSource dieSound;
     [SerializeField] private AudioSource[] hitSounds;
 
     private void Die()
     {
+        AudioSource.PlayClipAtPoint(dieSound.clip, transform.position);
+        Instantiate(dieParticle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

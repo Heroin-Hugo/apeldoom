@@ -17,25 +17,40 @@ public class PlayerHealth : MonoBehaviour
     [Header("Death")]
     [SerializeField] private GunParent[] objectsToDisable;
 
+    [Header("Healing")]
+    [SerializeField] private Animator healBorder;
+    [SerializeField] private AudioSource healSound;
+
     private int activate = Animator.StringToHash("Activate");
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
 
         hurtBorder.SetTrigger(activate);
         if (currentHealth < 0) Die();
     }
 
+    private void Update()
+    {
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
+    }
+
+    public void Heal(float health)
+    {
+        if(healBorder != null) healBorder.SetTrigger(activate);
+        if (healSound != null) healSound.Play();
+
+        currentHealth += health;
+    }
+
     private void Die()
     {
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-
         PlayerScriptsManager.instance.DisableControls();
+
+
         gameOverScreen.SetActive(true);
         foreach (var obj in objectsToDisable) obj.PlayerDeath();
     }
