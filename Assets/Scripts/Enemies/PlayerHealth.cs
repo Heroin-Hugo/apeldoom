@@ -12,18 +12,19 @@ public class PlayerHealth : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Slider healthBar;
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private Animator hurtBorder;
 
     [Header("Death")]
     [SerializeField] private GunParent[] objectsToDisable;
 
-
+    private int activate = Animator.StringToHash("Activate");
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
 
+        hurtBorder.SetTrigger(activate);
         if (currentHealth < 0) Die();
     }
 
