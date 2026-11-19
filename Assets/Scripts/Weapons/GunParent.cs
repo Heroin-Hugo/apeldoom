@@ -20,18 +20,14 @@ public class GunParent : MonoBehaviour
     private int holster = Animator.StringToHash("Holster");
 
 
-    private void Start()
-    {
-    }
-
     protected void Shoot()
     {
+        shootSound.Play();
         if(animator != null) animator.SetTrigger("Shoot");
 
         RaycastHit hit;
         if(Physics.Raycast(fpsCam.position, fpsCam.forward, out hit, weaponRange, hitLayers))
         {
-            shootSound.Play();
             EnemyHealth enemy = hit.transform.GetComponent<EnemyHealth>();
             if(enemy != null)
             {

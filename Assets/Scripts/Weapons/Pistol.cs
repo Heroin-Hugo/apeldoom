@@ -21,7 +21,7 @@ public class Pistol : GunParent
     {
         if (currentAmmo < maxAmmo && Input.GetKeyDown(KeyCode.R) || currentAmmo <= 0) reload = StartCoroutine(ReloadWeapon());
 
-        if(Input.GetKey(KeyCode.Mouse0) && timeSinceLastFire > fireRate)
+        if(!isReloading && Input.GetKey(KeyCode.Mouse0) && timeSinceLastFire > fireRate)
         {
             Shoot();
             timeSinceLastFire = 0;

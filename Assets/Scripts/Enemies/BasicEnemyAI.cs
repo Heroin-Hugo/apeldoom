@@ -13,6 +13,7 @@ public class BasicEnemyAI : MonoBehaviour
     [SerializeField] private float sightRange;
     [SerializeField] private float attackRange;
     [SerializeField] private float attackDamage;
+    [SerializeField] private Animator animator;
     [Space]
     public float swingToAttackDelay;
 
@@ -22,6 +23,10 @@ public class BasicEnemyAI : MonoBehaviour
     [SerializeField] private bool attackingPlayer;
 
     private Vector3 playerLookPos;
+
+    private int walking = Animator.StringToHash("Walking");
+    private int windup = Animator.StringToHash("Windup");
+    private int attack = Animator.StringToHash("Attack");
 
     private void Update()
     {
@@ -50,15 +55,18 @@ public class BasicEnemyAI : MonoBehaviour
     private void Idle()
     {
         agent.SetDestination(transform.position);
+        animator.SetBool("Walking", false);
     }
     private void ChasePlayer()
     {
+        animator.SetBool("Walking", true);
         agent.SetDestination(player.position);
     }
 
     private void Attack()
     {
-
+        animator.SetBool(walking, false);
+        animator.SetTrigger(windup);
         attackingPlayer = true;
 
         agent.SetDestination(transform.position);
@@ -68,6 +76,7 @@ public class BasicEnemyAI : MonoBehaviour
 
     private void Swing()
     {
+        animator.SetTrigger(attack);
         RaycastHit playerHit;
         if (Physics.Raycast(transform.position, transform.forward, out playerHit, attackRange + 2, playerAttackLayer))
         {
@@ -76,6 +85,14 @@ public class BasicEnemyAI : MonoBehaviour
             if (player != null) player.TakeDamage(attackDamage);
         }
 
-        attackingPlayer = false;
+        Invoke(nameof(ResetAttack), 0.75f);
+    }
+
+    private void ResetAttack() => attackingPlayer = false;
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }

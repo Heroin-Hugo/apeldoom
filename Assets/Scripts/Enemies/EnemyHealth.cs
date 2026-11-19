@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(dieSound.clip, transform.position);
         Instantiate(dieParticle, transform.position, Quaternion.identity);
+        WinGame.instance.AddKill();
         Destroy(gameObject);
     }
 
@@ -22,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
     {
         enemyHealth -= damage;
 
-        Instantiate(hitParticle, hitPoint, Quaternion.identity);
+        if(hitParticle != null) Instantiate(hitParticle, hitPoint, Quaternion.identity);
 
         int random = Random.Range(0, hitSounds.Length);
         hitSounds[random].Play();
