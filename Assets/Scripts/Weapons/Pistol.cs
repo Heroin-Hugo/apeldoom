@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Pistol : GunParent
 {
@@ -16,10 +17,21 @@ public class Pistol : GunParent
 
     Coroutine reload;
 
+    [Header("Ammo Counter")]
+    [SerializeField] private Image ammoSprite;
+    [SerializeField] private Sprite[] images;
+
+
+    private void OnEnable() => ammoSprite.gameObject.SetActive(true);
+    private void OnDisable() => ammoSprite.gameObject.SetActive(false);
+
 
     private void Update()
     {
-        if (currentAmmo < maxAmmo && Input.GetKeyDown(KeyCode.R) || currentAmmo <= 0) reload = StartCoroutine(ReloadWeapon());
+        if (!isReloading && currentAmmo < maxAmmo && Input.GetKeyDown(KeyCode.R) || currentAmmo <= 0)
+        {
+            reload = StartCoroutine(ReloadWeapon());
+        }
 
         if(!isReloading && Input.GetKey(KeyCode.Mouse0) && timeSinceLastFire > fireRate)
         {
@@ -27,7 +39,9 @@ public class Pistol : GunParent
             timeSinceLastFire = 0;
             currentAmmo--;
         }
+        
         timeSinceLastFire += Time.deltaTime;
+        ammoSprite.sprite = images[currentAmmo];
     }
 
     private IEnumerator ReloadWeapon()

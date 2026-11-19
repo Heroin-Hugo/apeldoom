@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(dieSound.clip, transform.position);
         Instantiate(dieParticle, transform.position, Quaternion.identity);
-        WinGame.instance.AddKill();
+        if(WinGame.instance != null) WinGame.instance.AddKill();
         Destroy(gameObject);
     }
 

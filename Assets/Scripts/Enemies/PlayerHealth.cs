@@ -22,10 +22,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioSource healSound;
 
     private int activate = Animator.StringToHash("Activate");
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool flashesScreen)
     {
         currentHealth -= damage;
 
+        if (flashesScreen) PlayerScriptsManager.instance.screenFlash.FlashScreen();
         hurtBorder.SetTrigger(activate);
         if (currentHealth < 0) Die();
     }

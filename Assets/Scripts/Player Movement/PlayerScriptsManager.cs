@@ -5,7 +5,7 @@ public class PlayerScriptsManager : MonoBehaviour
     public static PlayerScriptsManager instance;
     public PlayerMovement movement;
     public CameraLook look;
-
+    public ScreenFlash screenFlash;
 
     private void Start()
     {

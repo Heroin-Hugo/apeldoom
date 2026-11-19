@@ -21,6 +21,11 @@ public class BasicEnemyAI : MonoBehaviour
     [SerializeField] private bool inAttackRange;
 
     [SerializeField] private bool attackingPlayer;
+    [SerializeField] private bool flashesScreen;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioSource windupSound;
+    [SerializeField] private AudioSource shootSound;
 
     private Vector3 playerLookPos;
 
@@ -65,6 +70,7 @@ public class BasicEnemyAI : MonoBehaviour
 
     private void Attack()
     {
+        if (windupSound != null) windupSound.Play();
         animator.SetBool(walking, false);
         animator.SetTrigger(windup);
         attackingPlayer = true;
@@ -76,13 +82,14 @@ public class BasicEnemyAI : MonoBehaviour
 
     private void Swing()
     {
+        if(shootSound != null) shootSound.Play();
         animator.SetTrigger(attack);
         RaycastHit playerHit;
         if (Physics.Raycast(transform.position, transform.forward, out playerHit, attackRange + 2, playerAttackLayer))
         {
             Debug.Log(playerHit.transform.name);
             var player = playerHit.transform.GetComponent<PlayerHealth>();
-            if (player != null) player.TakeDamage(attackDamage);
+            if (player != null) player.TakeDamage(attackDamage, flashesScreen);
         }
 
         Invoke(nameof(ResetAttack), 0.75f);

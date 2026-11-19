@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 0a48122552440d34d9239605834d9901, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -433,6 +433,9 @@ MonoBehaviour:
   inSightRange: 0
   inAttackRange: 0
   attackingPlayer: 0
+  flashesScreen: 0
+  windupSound: {fileID: 0}
+  shootSound: {fileID: 0}
 --- !u!114 &104949482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3568,6 +3571,9 @@ MonoBehaviour:
   inSightRange: 0
   inAttackRange: 0
   attackingPlayer: 0
+  flashesScreen: 0
+  windupSound: {fileID: 0}
+  shootSound: {fileID: 0}
 --- !u!114 &1315566893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4017,6 +4023,9 @@ MonoBehaviour:
   inSightRange: 0
   inAttackRange: 0
   attackingPlayer: 0
+  flashesScreen: 0
+  windupSound: {fileID: 0}
+  shootSound: {fileID: 0}
 --- !u!114 &1424202387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4333,6 +4342,9 @@ MonoBehaviour:
   inSightRange: 0
   inAttackRange: 0
   attackingPlayer: 0
+  flashesScreen: 0
+  windupSound: {fileID: 0}
+  shootSound: {fileID: 0}
 --- !u!1 &1632975464
 GameObject:
   m_ObjectHideFlags: 0
@@ -4405,6 +4417,9 @@ MonoBehaviour:
   inSightRange: 0
   inAttackRange: 0
   attackingPlayer: 0
+  flashesScreen: 0
+  windupSound: {fileID: 0}
+  shootSound: {fileID: 0}
 --- !u!114 &1632975467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4601,6 +4616,9 @@ MonoBehaviour:
   inSightRange: 0
   inAttackRange: 0
   attackingPlayer: 0
+  flashesScreen: 0
+  windupSound: {fileID: 0}
+  shootSound: {fileID: 0}
 --- !u!114 &1758275647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5006,6 +5024,10 @@ PrefabInstance:
     - target: {fileID: 1960027506160495597, guid: b7602425e71188e4293ce9c69435438f, type: 3}
       propertyPath: m_Name
       value: Evil Noah
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960027506160495597, guid: b7602425e71188e4293ce9c69435438f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4586905249581047589, guid: b7602425e71188e4293ce9c69435438f, type: 3}
       propertyPath: player
@@ -5852,6 +5874,9 @@ MonoBehaviour:
   inSightRange: 0
   inAttackRange: 0
   attackingPlayer: 0
+  flashesScreen: 0
+  windupSound: {fileID: 0}
+  shootSound: {fileID: 0}
 --- !u!114 &2080326605
 MonoBehaviour:
   m_ObjectHideFlags: 0
